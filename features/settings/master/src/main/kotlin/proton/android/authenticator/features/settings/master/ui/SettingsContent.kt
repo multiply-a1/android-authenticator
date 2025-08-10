@@ -52,7 +52,6 @@ internal fun SettingsContent(
     state: SettingsMasterState.Ready,
     onDismissPassBanner: (SettingsMasterSettingsModel) -> Unit,
     onBackupsClick: () -> Unit,
-    onSyncChange: (SettingsMasterSettingsModel, Boolean) -> Unit,
     onAppLockTypeChange: (SettingsMasterSettingsModel, SettingsAppLockType, Context) -> Unit,
     onTapToRevealChange: (SettingsMasterSettingsModel, Boolean) -> Unit,
     onThemeTypeChange: (SettingsMasterSettingsModel, SettingsThemeType) -> Unit,
@@ -64,7 +63,6 @@ internal fun SettingsContent(
     onHowToClick: (String) -> Unit,
     onFeedbackClick: (String) -> Unit,
     onViewLogsClick: () -> Unit,
-    onDiscoverAppClick: (String, String) -> Unit,
     onVersionNameClick: () -> Unit,
     modifier: Modifier = Modifier
 ) = with(state) {
@@ -80,7 +78,7 @@ internal fun SettingsContent(
                     onDismissPassBanner(settingsModel)
                 },
                 onActionClick = {
-                    onDiscoverAppClick(bannerModel.passBannerApp.id, bannerModel.passBannerApp.url)
+                    // Discover functionality removed
                 }
             )
         }
@@ -93,21 +91,6 @@ internal fun SettingsContent(
                         titleText = UiText.Resource(id = R.string.settings_security_title_backups),
                         showNavigationIcon = true,
                         onClick = onBackupsClick
-                    )
-                },
-                {
-                    ToggleRow(
-                        titleText = UiText.Resource(id = R.string.settings_security_title_sync),
-                        isChecked = settingsModel.isSyncEnabled,
-                        onCheckedChange = { isSyncEnabled ->
-                            onSyncChange(settingsModel, isSyncEnabled)
-                        },
-                        descriptionText = accountDisplayName?.let { displayName ->
-                            UiText.Resource(
-                                id = R.string.settings_security_description_sync,
-                                displayName
-                            )
-                        }
                     )
                 },
                 {
@@ -227,21 +210,6 @@ internal fun SettingsContent(
             )
         )
 
-        if (discoverModel.shouldShowDiscoverSection) {
-            SettingsSection(
-                title = stringResource(id = R.string.settings_discover_section),
-                contents = discoverModel.discoverProtonApps.map { discoverApp ->
-                    {
-                        NavigationRow(
-                            titleText = discoverApp.title,
-                            leadingIcon = discoverApp.icon,
-                            description = discoverApp.description,
-                            onClick = { onDiscoverAppClick(discoverApp.id, discoverApp.url) }
-                        )
-                    }
-                }
-            )
-        }
 
         SettingsVersionRow(
             modifier = Modifier

@@ -30,7 +30,7 @@ import proton.android.authenticator.shared.ui.domain.theme.Theme
 internal fun SettingsVersionRow(versionName: String, modifier: Modifier = Modifier) {
     Text(
         modifier = modifier,
-        text = stringResource(id = R.string.settings_app_version, versionName),
+        text = stringResource(id = R.string.settings_app_version, "$versionName-airgapped"),
         color = Theme.colorScheme.textWeak,
         style = Theme.typography.captionRegular,
         textAlign = TextAlign.Center

@@ -108,7 +108,6 @@ fun SettingsMasterScreen(
                     state = currentState,
                     onDismissPassBanner = ::onUpdateIsPassBannerDismissed,
                     onBackupsClick = onBackupsClick,
-                    onSyncChange = ::onUpdateIsSyncEnabled,
                     onAppLockTypeChange = ::onUpdateAppLockType,
                     onTapToRevealChange = ::onUpdateIsTapToRevealEnabled,
                     onThemeTypeChange = ::onUpdateThemeType,
@@ -119,7 +118,6 @@ fun SettingsMasterScreen(
                     onExportClick = onExportClick,
                     onHowToClick = onHowToClick,
                     onFeedbackClick = onFeedbackClick,
-                    onDiscoverAppClick = onDiscoverAppClick,
                     onViewLogsClick = onViewLogsClick,
                     onVersionNameClick = onVersionNameClick
                 )
